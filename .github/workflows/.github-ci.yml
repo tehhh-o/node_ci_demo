@@ -12,13 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug PATH
-        shell: bash
-        run: |
-          echo "PATH is: $PATH"
-          which docker || echo "docker not found in PATH"
-          ls "C:/Program Files/Docker/Docker/resources/bin" || echo "Docker bin folder not found at expected location"
-
       - name: Run on node:18
         shell: bash
         env:
@@ -36,3 +29,6 @@ jobs:
     steps:
       - name: Show environment variable
         run: 'echo "Environment: ${{ vars.APP_ENV }}"'
+
+      - name: Using secret key
+        run: 'echo "Using secret Key: ${{ secrets.SECRET_API_KEY }}"'
