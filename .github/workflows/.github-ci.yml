@@ -7,14 +7,15 @@ on:
 jobs:
   build_job:
     runs-on: [self-hosted, docker]
-    container:
-      image: node:18
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run build
+      - name: Run on node:18
+        shell: bash
         run: |
-          echo "Running on local Docker runner"
-          node --version
+          docker run --rm -v "${{ github.workspace }}:/workspace" -w /workspace node:18 sh -c '
+            echo "Running on local Docker runner"
+            node --version
+          '
